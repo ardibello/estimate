@@ -1,0 +1,100 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Estimates API Server
+paths:
+  /issues:
+    post:
+      summary: process a new/created issue
+      operationId: postIssues
+      requestBody:
+        description: Post an issue
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostIssueRequest'
+        required: true
+      responses:
+        '200':
+          description: new issue response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostIssueResponse'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+components:
+  schemas:
+    Issue:
+      type: object
+      properties:
+        body:
+          type: string
+        number:
+          type: integer
+      required:
+        - body
+        - number
+    Repository:
+      type: object
+      properties:
+        full_name:
+          type: string
+      required:
+        - full_name
+    PostIssueRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum: [ opened ]
+        issue:
+          $ref: '#/components/schemas/Issue'
+        repository:
+          $ref: '#/components/schemas/Repository'
+      required:
+        - action
+        - issue
+        - repository
+    PostIssueResponse:
+      type: object
+      description: Post issue response
+    # --- ERROR RESPONSE SCHEMA ---
+    Detail:
+      type: object
+      properties:
+        field:
+          type: string
+          description: The specific field related to the error
+        message:
+          type: string
+          description: Human-readable explanation of the field error
+      required:
+        - field
+        - message
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int
+          description: HTTP status code
+        message:
+          type: string
+          description: Human-readable summary of the error
+        status:
+          type: string
+          description: Status code for categorization, e.g., 'INVALID_ARGUMENT'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Detail'
+          description: List of detailed error objects for granular issues
+      required:
+        - code
+        - message
+        - status
