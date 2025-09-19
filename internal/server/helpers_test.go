@@ -49,7 +49,7 @@ func newEchoContext(params *newEchoContextParams) (echo.Context, *httptest.Respo
 	return e.NewContext(req, rec), rec
 }
 
-// func newMockService(t *testing.T) (openapi.ServerInterface, application.DelegationsApp) {.
+// func newMockService(t *testing.T) (openapi.ServerInterface, application.EstimatesApp) {.
 func newMockService(t *testing.T) (*server.EstimatesAPI, applicationtest.MockEstimatesApp) {
 	ctrl := gomock.NewController(t)
 	app := applicationtest.NewMockEstimatesApp(ctrl)

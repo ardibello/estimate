@@ -8,7 +8,7 @@ import (
 	"github.com/ardibello/estimate/pkg/gen/openapi"
 )
 
-// EstimatesApp represents the business logic layer of the delegations API.
+// EstimatesApp represents the business logic layer of the Estimates API.
 type EstimatesApp interface {
 	ProcessNewIssue(ctx context.Context, newIssue *openapi.PostIssueRequest) error
 }
