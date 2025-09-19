@@ -83,8 +83,14 @@ The number `12345678` is your **Installation ID** - save this!
 
 ### Steps
 
+- Clone the repository.
+- Install dependencies: `go mod download`
+- cd into the project directory: `cd estimate`
 - Copy  `.env.example` to `.env`:
-- fill in the environment variables at `.env`
+- fill in the environment variables at `.env` with the values you got from the previous step. The pem file you can store in a single line by replacing new lines with `\n`. Example of how that line would look like in `.env`:
+```
+GITHUB_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAoCeB+vlcUYilkl0ubl+ws7o930eeC2HyUKDRcL8dToXpzLqf\n4mN1p3Kyb4FIvm03LDSKjbvdhsXiuEM519+NdQDk8fmZljj+6B1EDA==\n-----END RSA PRIVATE KEY-----"
+```
 - Start the server:
 
 ```bash
